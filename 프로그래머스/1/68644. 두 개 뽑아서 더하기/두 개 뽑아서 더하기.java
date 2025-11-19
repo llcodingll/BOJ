@@ -12,8 +12,7 @@ class Solution {
             }
         }
         
-        answer = result.stream().mapToInt(Integer::intValue).toArray();
-        Arrays.sort(answer);
+        answer = result.stream().sorted().mapToInt(Integer::intValue).toArray();
         return answer;
     }
 }
