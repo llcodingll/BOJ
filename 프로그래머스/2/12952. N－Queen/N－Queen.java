@@ -1,31 +1,36 @@
 import java.util.*;
 class Solution {
-    int count = 0;
+    private int solutionCount = 0;
     
     public int solution(int n) {
-        dfs(0, n, new int[n]);
-        return count;
+        int[] queensColumnPositions = new int[n];
+        placeQueenInRow(0, n, queensColumnPositions);
+        return solutionCount;
     }
     
-    void dfs(int row, int n, int[] cols) {
-        if (row == n) {
-            count++;
+    private void placeQueenInRow(int currentRow, int n, int[] queensColumnPositions) {
+        if (currentRow == n) {
+            solutionCount++;
             return;
         }
         
-        // 모든 열 시도
-        for (int col = 0; col < n; col++) {
-            if (isSafe(row, col, cols)) {
-                cols[row] = col;
-                dfs(row + 1, n, cols);
+        for (int candidateColumn = 0; candidateColumn < n; candidateColumn++) {
+            if (isSafePosition(currentRow, candidateColumn, queensColumnPositions)) {
+                queensColumnPositions[currentRow] = candidateColumn;
+                placeQueenInRow(currentRow + 1, n, queensColumnPositions);
             }
         }
     }
     
-    boolean isSafe(int row, int col, int[] cols) {
-        for (int r = 0; r < row; r++) {
-            int c = cols[r];
-            if (c == col || Math.abs(row-r) == Math.abs(col-c)) {
+    private boolean isSafePosition(int targetRow, int targetColumn, int[] queensColumnPositions) {
+        for (int previousRow = 0; previousRow < targetRow; previousRow++) {
+            int previousColumn = queensColumnPositions[previousRow];
+            
+            if (previousColumn == targetColumn) {
+                return false;
+            }
+            
+            if (Math.abs(targetRow - previousRow) == Math.abs(targetColumn - previousColumn)) {
                 return false;
             }
         }
