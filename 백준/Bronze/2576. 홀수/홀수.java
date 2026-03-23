@@ -8,24 +8,22 @@ public class Main {
 
         int num = 0;
         int min = Integer.MAX_VALUE;
+
         for (int i = 0; i < 7; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
             int a = Integer.parseInt(st.nextToken());
 
-            if (a % 2 == 0) {
-                continue;
-            }
+            if (a % 2 == 0) continue;
+
             num += a;
-            if (a < min) {
-                min = a;
-            }
+            min = Math.min(a, min);
         }
 
         if (num == 0) {
             System.out.println(-1);
-        } else {
-            System.out.print(num + "\n" + min);
+            return;
         }
 
+        System.out.print(num + "\n" + min);
     }
 }
