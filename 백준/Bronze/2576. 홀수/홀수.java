@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.*;
 
 public class Main {
 
@@ -10,10 +9,11 @@ public class Main {
         int min = Integer.MAX_VALUE;
 
         for (int i = 0; i < 7; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int a = Integer.parseInt(st.nextToken());
+            int a = Integer.parseInt(br.readLine());
 
-            if (a % 2 == 0) continue;
+            if (a % 2 == 0) {
+                continue;
+            }
 
             num += a;
             min = Math.min(a, min);
